@@ -1,0 +1,36 @@
+# ignore all IIS files
+web.config
+
+# ignore all config.core.php
+config.core.php
+
+# ignore all error.log
+error.log
+
+# ignore all compressed js and css
+*-min.css
+*-min.js
+
+# ignore concatenated js
+modext.js
+
+# ignore common root paths for docs and assets
+/docs/
+
+# ignore various IDE project files and folders
+.idea/
+
+# ignore "special" PHP files 
+test*.php
+
+# ignore SASS cache
+assets/templates/project-name/css/.sass-cache/*
+
+# Specific files to exclude
+core/config/config.inc.php
+cache/
+core/cache/
+*_bak*
+.DS_Store
+*.swp
+*.swo
