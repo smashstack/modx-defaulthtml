@@ -1,9 +1,7 @@
 # Add GA code in (copy it from their site) at launch
 
 # Handy terminal commands
--- sass --watch stylesheet.scss:stylesheet.css --style compressed
-
-# Update file path on both dev-index.html and .gitignore (for SASS Cache directory)
+-- sass --watch assets/templates/default/css/stylesheet.scss:assets/templates/default/css/stylesheet.css --style compressed
 
 # HTML Setup Documentation: http://screencast.com/t/r17bvTMT4m
 
