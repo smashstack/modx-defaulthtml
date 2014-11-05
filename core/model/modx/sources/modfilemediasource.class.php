@@ -121,7 +121,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $canCreate = $this->checkPolicy('create');
 
         $directories = array();
+        $dirnames = array();
         $files = array();
+        $filenames = array();
+
         if (!is_dir($fullPath)) return array();
 
         /* iterate through directories */
@@ -147,6 +150,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 if ($this->hasPermission('file_upload') && $canCreate) $cls[] = 'pupload';
                 if ($this->hasPermission('file_create') && $canCreate) $cls[] = 'pcreate';
 
+                $dirnames[] = strtoupper($fileName);
                 $directories[$fileName] = array(
                     'id' => $bases['urlRelative'].rtrim($fileName,'/').'/',
                     'text' => $fileName,
@@ -186,6 +190,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 /* get relative url from manager/ */
                 $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
                 $fromManagerUrl = ($bases['urlIsRelative'] ? '../' : '').$fromManagerUrl;
+
+                $filenames[] = strtoupper($fileName);
                 $files[$fileName] = array(
                     'id' => $bases['urlRelative'].$fileName,
                     'text' => $fileName,
@@ -210,11 +216,13 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         $ls = array();
         /* now sort files/directories */
-        ksort($directories);
+        array_multisort($dirnames, SORT_ASC, SORT_STRING, $directories);
+        // uksort($directories, 'strnatcasecmp');
         foreach ($directories as $dir) {
             $ls[] = $dir;
         }
-        ksort($files);
+        array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
+        // uksort($files, 'strnatcasecmp');
         foreach ($files as $file) {
             $ls[] = $file;
         }
@@ -862,6 +870,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         /* iterate */
         $files = array();
+        $filenames = array();
+
         if (!is_dir($fullPath)) {
             $this->addError('dir',$this->xpdo->lexicon('file_folder_err_ns').$fullPath);
             return array();
@@ -911,7 +921,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'h' => $thumbHeight,
                         'f' => $thumbnailType,
                         'q' => $thumbnailQuality,
-                        'far' => 1,
+                        'far' => 'C',
                         'HTTP_MODAUTH' => $modAuth,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
@@ -930,12 +940,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                 } else {
                     $preview = 0;
+                    $size = null;
                     $thumb = $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
                     $thumbWidth = $imageWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
                     $thumbHeight = $imageHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
                 }
                 $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
+                $filenames[] = strtoupper($fileName);
                 $files[] = array(
                     'id' => $bases['urlAbsoluteWithPath'].$fileName,
                     'name' => $fileName,
@@ -963,6 +975,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 );
             }
         }
+
+        array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
+
         return $files;
     }
     /**

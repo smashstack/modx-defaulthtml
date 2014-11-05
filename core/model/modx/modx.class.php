@@ -1382,6 +1382,8 @@ class modX extends xPDO {
                 $this->config['https_port']= isset($GLOBALS['https_port']) ? $GLOBALS['https_port'] : 443;
             if (!isset ($this->config['error_handler_class']))
                 $this->config['error_handler_class']= 'error.modErrorHandler';
+            if (!isset ($this->config['server_port']))
+                $this->config['server_port']= isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : '';
 
             $this->_config= $this->config;
             if (!$this->_loadConfig()) {
@@ -1669,7 +1671,7 @@ class modX extends xPDO {
         $response = '';
         if (file_exists($processorFile)) {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
-            if (!isset($this->error)) $this->getService('error', 'modError');
+            if (!isset($this->error)) $this->getService('error', 'error.modError');
 
             if ($isClass) {
                 /* ensure processor file is only included once if run multiple times in a request */

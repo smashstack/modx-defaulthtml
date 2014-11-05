@@ -1,7 +1,7 @@
 # Add GA code in (copy it from their site) at launch
 
 # Handy terminal commands
--- sass --watch assets/templates/default/css/stylesheet.scss:assets/templates/default/css/stylesheet.css --style compressed
+$ sass --watch assets/templates/default/css/stylesheet.scss:assets/templates/default/css/stylesheet.css --style compressed
 
 # HTML Setup Documentation: http://screencast.com/t/r17bvTMT4m
 

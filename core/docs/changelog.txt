@@ -2,6 +2,75 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.3.2-pl (October 21, 2014)
+====================================
+- Fixed issue with S3 buckets containing dots
+- Fixes issue with Form Customizations containing multiple constraints on TVs
+- Single-Select TVs now retain custom values in the dropdown select options
+- Fixed birthdate on 1970/01/01 resulting in false
+- Restores horizontal scrolling to the Resource tree [#11949]
+- Language simplification for context menu items
+- Fixed property set creation which allowed empty 'name'
+- Fix for arrow that pointed wrong way in collapse areas
+- Fixed rendering TVs to modx-resource-content by Manager customizations
+- Fix default category name when creating a new element instead of showing 0
+- Fix store load if init combobox value is 0
+- Display context name in combo box
+- Fixed elements search results icons
+- Removed listeners/actions on Media browser data view double click
+- Added visual indication in elements trees when an element is edited (active class)
+- Removed unused code in Resource Tree Panel
+- Enable path style on AWS driver if the bucket's name contains a dot
+- More use of 'manager_date_format' in the manager
+- Use FontAwesome checkbox icons instead of sprite images
+- Made MODx.combo.Browser Media Source defaulting to the defined default Media source instead of hard coded id "1"
+- Replace security/forms/set/export processor with a class based one and fix
+- Fixed issue where batch removing access policies was only allowed for "core" policies (instead of preventing deletion for core policies)
+- Updated alias length to 255 in ExtJS
+- Fix superbox selects in toolbars
+- Prevent combobox lists being taller than the screen, mainly from windows
+- Fix MODx.Ajax.request ot handle multiple concurrent requests
+- Fix loading default manager controller without changing the manager theme when the manager theme does not include the requested controller
+- Fix encoded htmlspecialchars in resource overview > cache output tab
+- Fix creation of folders in S3 media source root
+- Disable keyboard shortcut to focus the search bar
+- Updated "far" parameter to "C" (to provide correct thumbnails aspect ratio) in modfilemediasource
+- When using resource_tree_node_tooltip system setting, make sure the given field is not empty before displaying the quick tip
+- Updated welcome url for 2.3
+- User / User Group Settings update and delete fix
+- Fixed modx_user_group_settings table on SQLServer
+- Make sure modContext config is "prepared" before using makeUrl()
+- Have [[++server_port]] report the port number
+- Consider dev version lower than alpha
+- Handles "site preview" when default_context is not "web" context or when manager is on its own (sub)domain
+- Fixes missing Permissions tabs for anonymous User Group
+- Updated modPHPMailer to use getService instead of creating new instance of modError
+- Refresh context's name in tree after changing it
+- Use modx_browser_default_sort setting for sorting in RTE browser
+- Fix front-end user group comparison bug when assigning new user groups [#11399]
+- Prevent XSS via GET param for manager controller action [#11966]
+- Fix CRC icons in tree
+- Refresh/expand appropriate tree node when creating a resource using "quick create"
+- Limit property set name/description length
+- Added ability to update a namespace within a window
+- Use lexicon strings instead of hard coded ones in manager login form
+- Display an error when updating a user from grid with duplicate email address
+- Create new instance of console on every action with package manager
+- Reset addresses list on failure send
+- Fixed superboxselect close button in Safari
+- Fixed typo forcing empty calls to modError::addError() for all sent emails
+- Fixed issue with tree node "jump" on expand/collapse
+- Added some client side validation when creating a new user group
+- Fixed mimetype issue on s3 Media Source
+- Do not display setting modification date if no modification has been done [#11762]
+- Moved user groups access tabs within a single permissions tab [#11769]
+- Make use of FontAwesome for files icons [#11851]
+- Fixed issue where required field was not highlighted [#11826]
+- Updated NodeJS dependencies [#11827]
+- Removed limit on Media Sources in the tree panel [#11834]
+- File and directory sorting improvements, more natural and consistent [#10286]
+- Accessibility improvements for new checkbox / radios [#11772]
+
 MODX Revolution 2.3.1-pl (July 22, 2014)
 ====================================
 - Make Gravatar optional (enabled by default)
